@@ -67,7 +67,7 @@ cd springboot-product-api
 mvn spring-boot:run
 
 
-API will start at 👉 http://localhost:8080
+API will start at 👉 http://localhost:8085
 
 📖 API Endpoints
 Method	Endpoint	Description
@@ -79,7 +79,7 @@ DELETE	/api/products/{id}	Delete product
 📊 Swagger Documentation
 
 Once the app is running, access Swagger UI at:
-👉 http://localhost:8080/swagger-ui/index.html
+👉 http://localhost:8085/swagger-ui/index.html
 
 🧪 Testing
 
@@ -97,5 +97,6 @@ Contributions are welcome! Feel free to fork this repo and create pull requests.
 
 Mahesh
 📧 maheshmeg05@gmail.com
+
 https://github.com/Maheshmegs
 🔗 GitHub Profile
