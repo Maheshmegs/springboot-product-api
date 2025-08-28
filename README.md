@@ -96,7 +96,7 @@ Contributions are welcome! Feel free to fork this repo and create pull requests.
 👤 Author
 
 Mahesh
-📧 maheshmeg05@gmail.com
+📧 maheshmegs05@gmail.com
 
 https://github.com/Maheshmegs
 🔗 GitHub Profile
