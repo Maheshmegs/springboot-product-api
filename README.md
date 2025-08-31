@@ -95,7 +95,9 @@ mvn spring-boot:run
 ▶️ Run the Frontend
 
 Navigate to frontend/ folder.
-
+👉 You can access the **frontend UI** here:  
+[http://localhost:8085/products.html](http://localhost:8085/products.html)
+or 
 Open index.html in a browser (or use Live Server in VS Code).
 
 The UI will connect to backend at: http://localhost:8085/api/products
