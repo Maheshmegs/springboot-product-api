@@ -7,30 +7,179 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
+    /* Body Background */
     body {
-      background: #f8f9fa;
+      margin: 0;
+      background: linear-gradient(135deg, rgba(29,78,216,0.8), rgba(16,185,129,0.7)),
+                  url('https://images.unsplash.com/photo-1602272939849-0cfb9fc5f386?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-blend-mode: overlay;
+      font-family: "Segoe UI", sans-serif;
     }
+
+    /* Navbar */
     .navbar {
       border-radius: 0;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
     }
+
+    .home-btn {
+      margin-right: 10px;
+      background-color: #fff;
+      color: #0d6efd;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .home-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Card/Table */
     .card {
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      animation: fadeUp 0.8s ease;
     }
+
     .table th {
-      background-color: #f1f3f6;
+      background-color: rgba(255,255,255,0.85);
+    }
+
+    .table tbody tr {
+      background: rgba(255,255,255,0.8);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .table tbody tr:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Modal */
+    .modal-content {
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .footer:hover {
+      color: #ffe600;
+      transform: scale(1.08);
+      text-shadow: 0 0 14px rgba(255,230,0,0.9);
+    }
+
+    /* Floating Action Button */
+    .fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Card-style Table for Mobile */
+    @media (max-width: 768px) {
+      table thead {
+        display: none;
+      }
+
+      table tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        background: rgba(255,255,255,0.9);
+        border-radius: 12px;
+        padding: 12px 15px;
+      }
+
+      table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+      }
+
+      table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #555;
+      }
+
+      table tbody td.text-center {
+        justify-content: flex-end;
+      }
+
+      .modal-dialog {
+        max-width: 95%;
+        margin: 10px auto;
+      }
+
+      .modal-content {
+        padding: 15px;
+      }
+
+      /* Hide navbar Add Product button on mobile */
+      .navbar .btn-light {
+        display: none;
+      }
+
+      /* Show FAB on mobile */
+      .fab {
+        display: flex;
+      }
+    }
+
+    /* Hide FAB on large screens */
+    @media (min-width: 769px) {
+      .fab {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="#">Product Manager</a>
-      <button class="btn btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#productModal">
-        <i class="fa fa-plus"></i> Add Product
-      </button>
+      <div class="d-flex ms-auto">
+        <a href="index.html" class="btn home-btn me-2"><i class="fa fa-home"></i> Home</a>
+        <!-- Add Product button in Navbar -->
+        <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#productModal">
+          <i class="fa fa-plus"></i> Add Product
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -53,15 +202,13 @@
               <th class="text-center">Actions</th>
             </tr>
           </thead>
-          <tbody id="productTableBody">
-            <!-- Products will load here -->
-          </tbody>
+          <tbody id="productTableBody"></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- Modal for Add/Edit -->
+  <!-- Modal -->
   <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content rounded-4 shadow">
@@ -73,7 +220,7 @@
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Product ID</label>
-              <input type="number" class="form-control" id="productId" required>
+              <input type="number" class="form-control" id="productId" placeholder="Leave blank for new product">
             </div>
             <div class="mb-3">
               <label class="form-label">Name</label>
@@ -83,11 +230,11 @@
               <label class="form-label">Category</label>
               <select id="productCategory" class="form-select" required>
                 <option value="">Select Category</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-                <option>Grocery</option>
-                <option>Books</option>
-                <option>Other</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Grocery">Grocery</option>
+                <option value="Books">Books</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div class="mb-3">
@@ -104,109 +251,120 @@
     </div>
   </div>
 
+  <!-- Floating Add Button (FAB) -->
+  <div class="fab d-lg-none" data-bs-toggle="modal" data-bs-target="#productModal">
+    <i class="fa fa-plus"></i>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">Developed by Mahesh_Megs</div>
+
   <!-- Bootstrap + JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- API JS -->
   <script>
     const API_URL = "/api/products";
     const productTableBody = document.getElementById("productTableBody");
     const productForm = document.getElementById("productForm");
     const modalTitle = document.getElementById("modalTitle");
-    const productModal = new bootstrap.Modal(document.getElementById("productModal"));
+    const productModalEl = document.getElementById("productModal");
+    const productModal = new bootstrap.Modal(productModalEl);
     const searchBox = document.getElementById("searchBox");
-
     let productsCache = [];
 
-    // Load products
+    function safeGet(id) { const el = document.getElementById(id); if(!el) console.warn(`id="${id}" not found`); return el; }
+
     async function fetchProducts() {
-      const res = await fetch(API_URL);
-      productsCache = await res.json();
-      renderProducts(productsCache);
+      try {
+        const res = await fetch(API_URL);
+        productsCache = await res.json();
+        renderProducts(productsCache);
+      } catch(err) { 
+        console.error(err);
+        productTableBody.innerHTML = `<tr><td colspan="5" class="text-danger">Failed to load products</td></tr>`;
+      }
     }
 
-    // Render product rows
     function renderProducts(products) {
       productTableBody.innerHTML = "";
       products.forEach(p => {
+        const categoryText = p.category ?? "(no category)";
         productTableBody.innerHTML += `
           <tr>
-            <td>${p.id}</td>
-            <td>${p.name}</td>
-            <td>${p.category}</td>
-            <td>$${p.price.toFixed(2)}</td>
-            <td class="text-center">
+            <td data-label="ID">${p.id}</td>
+            <td data-label="Name">${p.name}</td>
+            <td data-label="Category">${categoryText}</td>
+            <td data-label="Price ($)">$${(p.price ?? 0).toFixed(2)}</td>
+            <td data-label="Actions" class="text-center">
               <button class="btn btn-sm btn-outline-primary me-2" onclick="editProduct(${p.id})"><i class="fa fa-edit"></i></button>
               <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${p.id})"><i class="fa fa-trash"></i></button>
             </td>
-          </tr>
-        `;
+          </tr>`;
       });
     }
 
-    // Search filter
-    searchBox.addEventListener("input", () => {
-      const query = searchBox.value.toLowerCase();
-      const filtered = productsCache.filter(p =>
-        p.name.toLowerCase().includes(query) ||
-        p.category.toLowerCase().includes(query) ||
-        p.id.toString().includes(query)
-      );
-      renderProducts(filtered);
-    });
+    if(searchBox){
+      searchBox.addEventListener("input", ()=> {
+        const query = searchBox.value.toLowerCase();
+        renderProducts(productsCache.filter(p=> 
+          (p.name||"").toLowerCase().includes(query) ||
+          (p.category||"").toLowerCase().includes(query) ||
+          ("" + (p.id||"")).includes(query)
+        ));
+      });
+    }
 
-    // Add/Edit product
-    productForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const id = parseInt(document.getElementById("productId").value);
-      const product = {
-        id,
-        name: document.getElementById("productName").value,
-        category: document.getElementById("productCategory").value,
-        price: parseFloat(document.getElementById("productPrice").value)
-      };
+    if(productForm){
+      productForm.addEventListener("submit", async e=>{
+        e.preventDefault();
+        const elId=safeGet("productId"), elName=safeGet("productName"), elCategory=safeGet("productCategory"), elPrice=safeGet("productPrice");
+        const idVal = elId ? elId.value.trim() : "", id = idVal ? parseInt(idVal,10):null;
+        const product = { name: elName.value.trim(), category: elCategory.value, price: parseFloat(elPrice.value) };
+        if(id) product.id=id;
+        if(!product.name||!product.category){ alert("Enter all fields."); return; }
+        try{
+          let resp;
+          if(id && productsCache.find(p=>p.id===id))
+            resp = await fetch(`${API_URL}/${id}`,{ method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify(product) });
+          else
+            resp = await fetch(`${API_URL}`,{ method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(product) });
+          await resp.json();
+          productForm.reset(); modalTitle.innerText="Add Product"; productModal.hide(); fetchProducts();
+       
+        } catch(err){ 
+          console.error(err); 
+          alert("Save failed. Check console."); 
+        }
+      });
+    }
 
-      const existing = productsCache.find(p => p.id === id);
-      if (existing) {
-        await fetch(API_URL + '/' + id, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(product)
-        });
-      } else {
-        await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(product)
-        });
-      }
-
-      productForm.reset();
-      modalTitle.innerText = "Add Product";
-      productModal.hide();
-      fetchProducts();
-    });
-
-    // Edit
-    function editProduct(id) {
-      const product = productsCache.find(p => p.id === id);
-      if (!product) return;
-      document.getElementById("productId").value = product.id;
-      document.getElementById("productName").value = product.name;
-      document.getElementById("productCategory").value = product.category;
-      document.getElementById("productPrice").value = product.price;
+    window.editProduct = function(id){
+      const p = productsCache.find(x => x.id === id); 
+      if(!p) return alert("Product not found");
+      safeGet("productId").value = p.id;
+      safeGet("productName").value = p.name;
+      safeGet("productCategory").value = p.category ?? "";
+      safeGet("productPrice").value = p.price;
       modalTitle.innerText = "Edit Product";
       productModal.show();
     }
 
-    // Delete
-    async function deleteProduct(id) {
-      if (!confirm("Are you sure you want to delete this product?")) return;
-      await fetch(API_URL + '/' + id, { method: 'DELETE' });
-      fetchProducts();
+    window.deleteProduct = async function(id) {
+      if(!confirm("Are you sure you want to delete this product?")) return;
+      try {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+        fetchProducts();
+      } catch(err) {
+        console.error(err);
+        alert("Failed to delete. Check console.");
+      }
     }
 
     // Initial load
-    fetchProducts();
+    window.addEventListener("load", fetchProducts);
   </script>
+
 </body>
 </html>
+       
