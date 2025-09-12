@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Product API</title>
+  <meta charset="UTF-8">
+  <title>Product API</title>
+  <style>
+    /* Background with peacock feather inspired gradient */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(29,78,216,0.8), rgba(16,185,129,0.7)), 
+                  url('https://images.unsplash.com/photo-1602272939849-0cfb9fc5f386?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay;
+      font-family: "Segoe UI", sans-serif;
+      color: #fff;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+
+    p {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    /* Stylish link button */
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    /* Footer text */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer:hover {
+      color: #ffe600;
+      transform: scale(1.1);
+      text-shadow: 0px 0px 12px rgba(255, 230, 0, 0.9);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Product API</h1>
-    <p>Use /api endpoints to access the backend.</p>
+  <h1>Welcome to Product API</h1>
+  <p>Use <b>/api</b> endpoints to access the backend.</p>
+  <p>OR</p>
+  <a href="http://localhost:8085/products.html" target="_self">CLICK HERE FOR PRODUCTS</a>
+
+  <div class="footer">Designed & Developed by Mahesh_Megs</div>
 </body>
 </html>
+
